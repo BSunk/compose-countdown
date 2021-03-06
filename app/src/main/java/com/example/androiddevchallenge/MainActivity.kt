@@ -19,30 +19,48 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.animation.core.*
-import androidx.compose.foundation.Image
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
+import androidx.compose.material.ExtendedFloatingActionButton
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.androiddevchallenge.ui.theme.MyTheme
-import androidx.compose.runtime.*
-import androidx.compose.ui.composed
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.graphics.RectangleShape
 
 class MainActivity : AppCompatActivity() {
 
@@ -96,7 +114,6 @@ fun MyApp(viewModel: MainActivityViewModel) {
                     backgroundColor = Color.DarkGray
                 )
             }
-
         }
     }
 }
@@ -117,13 +134,15 @@ fun ClockView(animate: Boolean) {
         modifier = Modifier
             .size(150.dp)
             .border(
-                width = 10.dp, if (animate) {
+                width = 10.dp,
+                if (animate) {
                     if (isSystemInDarkTheme()) Color.White else Color.Black
-                } else Color.Gray, CircleShape
+                } else Color.Gray,
+                CircleShape
             )
             .rotate(if (animate) rotation else 0f)
             .clip(CircleShape)
-            .background(if(isSystemInDarkTheme()) Color.Black else Color.White)
+            .background(if (isSystemInDarkTheme()) Color.Black else Color.White)
     ) {
         Box(
             modifier = Modifier.composed {
@@ -140,7 +159,6 @@ fun ClockView(animate: Boolean) {
             }
         )
     }
-
 }
 
 @Composable
@@ -185,7 +203,6 @@ fun TimerView(viewModel: MainActivityViewModel) {
                 modifier = Modifier.size(72.dp)
             )
         }
-
     }
 }
 
@@ -193,7 +210,7 @@ fun TimerView(viewModel: MainActivityViewModel) {
 @Composable
 fun LightPreview() {
     MyTheme {
-        //MyApp()
+        // MyApp()
     }
 }
 
@@ -201,7 +218,6 @@ fun LightPreview() {
 @Composable
 fun DarkPreview() {
     MyTheme(darkTheme = true) {
-        //MyApp()
+        // MyApp()
     }
 }
-
