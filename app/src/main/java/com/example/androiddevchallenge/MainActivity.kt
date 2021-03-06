@@ -123,7 +123,7 @@ fun ClockView(animate: Boolean) {
             )
             .rotate(if (animate) rotation else 0f)
             .clip(CircleShape)
-            .background(Color.White)
+            .background(if(isSystemInDarkTheme()) Color.Black else Color.White)
     ) {
         Box(
             modifier = Modifier.composed {
